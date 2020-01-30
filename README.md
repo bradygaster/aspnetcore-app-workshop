@@ -8,7 +8,9 @@
 
 You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line.
 
-> :note: If you are installing Visual Studio, you only need to install the `ASP.NET and web development` workload.
+> | **NOTE:** |
+> | - |
+> | *If you are installing Visual Studio, you only need to select the `ASP.NET and web development` workload.* |
 
 If you have issues downloading the installers, we may have USB sticks with offline installers for you to use.
 
@@ -48,7 +50,7 @@ You'll store the data in a SQL Server database. The following diagram shows the 
 
 ## Sessions
 
-The table below summarizes the tasks that you'll perform in each session.
+The table below provides links to the exercises for each session.
 
 | Session | Topics |
 | ----- | ---- |
