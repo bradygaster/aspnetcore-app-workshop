@@ -36,7 +36,7 @@ Session 8 shows how to create a Single Page Application (SPA) that acts as an al
 
 ### Application Architecture
 
-The diagram below highlights the components you'll create in this workshop, and the technologies used.
+The diagram below highlights the components you'll create in this workshop, and the technologies used. The Conference DTO project is based on .NET Standard for maximum interopability with front-ends that use technologies other than .NET Core.
 
 ![Architecture Diagram](/docs/images/ConferencePlannerArchitectureDiagram.svg)
 
