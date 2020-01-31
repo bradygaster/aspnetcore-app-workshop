@@ -8,9 +8,7 @@
 
 You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line.
 
-> | **NOTE:** |
-> | - |
-> | *If you are installing Visual Studio, you only need to select the `ASP.NET and web development` workload.* |
+> **Note:** If you are installing Visual Studio, you only need to select the `ASP.NET and web development` workload.
 
 If you have issues downloading the installers, we may have USB sticks with offline installers for you to use.
 
@@ -38,15 +36,15 @@ Session 8 shows how to create a Single Page Application (SPA) that acts as an al
 
 The diagram below highlights the components you'll create in this workshop, and the technologies used. The Conference DTO project is based on .NET Standard for maximum interopability with front-ends that use technologies other than .NET Core.
 
-![Architecture Diagram](/docs/images/ConferencePlannerArchitectureDiagram.svg)
+![Architecture Diagram](docs/images/ConferencePlannerArchitectureDiagram.svg)
 
 ### Database Schema
 
 You'll store the data in a SQL Server database. The following diagram shows the tables that the application will create.
 
-**NOTE TO SELF: MAY NEED TO REGENERATE THIS DIAGRAM IF IT IS NOT UP TO DATE**
+<!--**NOTE TO SELF: MAY NEED TO REGENERATE THIS DIAGRAM IF IT IS NOT UP TO DATE**-->
 
-![Database Schema Diagram](/docs/conference-planner-db-diagram.png)
+![Database Schema Diagram](docs/images/conference-planner-db-diagram.png)
 
 ## Sessions
 
