@@ -56,11 +56,11 @@ The table below provides links to the exercises for each session.
 
 | Session | Topics |
 | ----- | ---- |
-| [Session #1](/docs/1.%20Create%20BackEnd%20API%20project.md) | Build the back-end web API with a basic Entity Framework model. |
-| [Session #2](/docs/2.%20Build%20out%20BackEnd%20and%20Refactor.md) | Extend the Entity Framework model. Add DTOs to the back-end web API, and refactor the model classes into view models. |
-| [Session #3](/docs/3.%20Add%20front-end%2C%20render%20agenda%2C%20set%20up%20front-end%20models.md) | Create an ASP.NET front-end web application, display session and speaker information, and create front-end models. |
-| [Session #4](/docs/4.%20Add%20auth%20features.md) | Add authentication to the front-end web application. Implement an administrator policy that enables specific users to edit sessions information. Define and use a custom auth tag helper. |
-| [Session #5](/docs/5.%20Add%20personal%20agenda.md) | Enable users to register for a conference and create their own personal agenda. |
+| [Session #1](docs/1.%20Create%20BackEnd%20API%20project.md) | Build the back-end web API with a basic Entity Framework model. |
+| [Session #2](docs/2.%20Build%20out%20BackEnd%20and%20Refactor.md) | Extend the Entity Framework model. Add DTOs to the back-end web API, and refactor the model classes into view models. |
+| [Session #3](docs/3.%20Add%20front-end%2C%20render%20agenda%2C%20set%20up%20front-end%20models.md) | Create an ASP.NET front-end web application, display session and speaker information, and create front-end models. |
+| [Session #4](docs/4.%20Add%20auth%20features.md) | Add authentication to the front-end web application. Implement an administrator policy that enables specific users to edit sessions information. Define and use a custom auth tag helper. |
+| [Session #5](docs/5.%20Add%20personal%20agenda.md) | Enable users to register for a conference and create their own personal agenda. |
 | [Session #6](docs/6.%20Production%20Readiness%20and%20Deployment.md) | Configure health diagnostics for the back-end web API and the front-end web application. Deploy the back-end and front-end components to a production environment. |
-| [Session #7](/docs/7.%20Challenges.md) | Add support for external authentication (Google or Twitter). Add a third-party logger to the front-end web application. Provide support for image uploading, editing, and display. Implement caching in the front-end web application. Modify the back end to store data in MySQL or PostgreSQL. Write unit and functional tests. Add further features to the front-end and back-end applications.
-| [Session #8](/docs/8.%20SPA%20FrontEnd.md) | Create a SPA front-end web application. |
+| [Session #7](docs/7.%20Challenges.md) | Add support for external authentication (Google or Twitter). Add a third-party logger to the front-end web application. Provide support for image uploading, editing, and display. Implement caching in the front-end web application. Modify the back end to store data in MySQL or PostgreSQL. Write unit and functional tests. Add further features to the front-end and back-end applications.
+| [Session #8](docs/8.%20SPA%20FrontEnd.md) | Create a SPA front-end web application. |
