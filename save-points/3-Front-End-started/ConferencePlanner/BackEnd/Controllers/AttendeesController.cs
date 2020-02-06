@@ -1,15 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BackEnd.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using BackEnd.Data;
 using ConferenceDTO;
 
 namespace BackEnd.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AttendeesController : ControllerBase
     {
@@ -21,11 +22,11 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("{username}")]
-        public async Task<ActionResult<AttendeeResponse>> Get(string username)
+        public async Task<ActionResult<AttendeeResponse>> GetAttendee(string username)
         {
             var attendee = await _context.Attendees.Include(a => a.SessionsAttendees)
-                                                .ThenInclude(sa => sa.Session)
-                                              .SingleOrDefaultAsync(a => a.UserName == username);
+                                                   .ThenInclude(sa => sa.Session)
+                                                   .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
             {
@@ -40,7 +41,7 @@ namespace BackEnd.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<AttendeeResponse>> Post(ConferenceDTO.Attendee input)
+        public async Task<ActionResult<AttendeeResponse>> PostAttendee(ConferenceDTO.Attendee input)
         {
             // Check if the attendee already exists
             var existingAttendee = await _context.Attendees
@@ -65,7 +66,7 @@ namespace BackEnd.Controllers
 
             var result = attendee.MapAttendeeResponse();
 
-            return CreatedAtAction(nameof(Get), new { username = result.UserName }, result);
+            return CreatedAtAction(nameof(GetAttendee), new { username = result.UserName }, result);
         }
 
         [HttpPost("{username}/session/{sessionId}")]
@@ -76,8 +77,8 @@ namespace BackEnd.Controllers
         public async Task<ActionResult<AttendeeResponse>> AddSession(string username, int sessionId)
         {
             var attendee = await _context.Attendees.Include(a => a.SessionsAttendees)
-                                                .ThenInclude(sa => sa.Session)
-                                              .SingleOrDefaultAsync(a => a.UserName == username);
+                                                   .ThenInclude(sa => sa.Session)
+                                                   .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
             {
@@ -103,7 +104,7 @@ namespace BackEnd.Controllers
 
             return result;
         }
-
+        
         [HttpDelete("{username}/session/{sessionId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -112,7 +113,7 @@ namespace BackEnd.Controllers
         public async Task<IActionResult> RemoveSession(string username, int sessionId)
         {
             var attendee = await _context.Attendees.Include(a => a.SessionsAttendees)
-                                              .SingleOrDefaultAsync(a => a.UserName == username);
+                                                   .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
             {

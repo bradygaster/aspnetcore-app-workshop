@@ -12,12 +12,10 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
         protected readonly IApiClient _apiClient;
 
-        public IndexModel(ILogger<IndexModel> logger, IApiClient apiClient)
+        public IndexModel(IApiClient apiClient)
         {
-            _logger = logger;
             _apiClient = apiClient;
         }
 

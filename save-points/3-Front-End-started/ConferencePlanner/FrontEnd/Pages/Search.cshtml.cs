@@ -7,7 +7,7 @@ using FrontEnd.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FrontEnd.Pages
+namespace FrontEnd
 {
     public class SearchModel : PageModel
     {

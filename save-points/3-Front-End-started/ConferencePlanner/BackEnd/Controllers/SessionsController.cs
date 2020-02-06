@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BackEnd.Data;
-using ConferenceDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BackEnd.Data;
+using ConferenceDTO;
 
 namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SessionsController : Controller
+    public class SessionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
@@ -21,26 +21,28 @@ namespace BackEnd.Controllers
             _context = context;
         }
 
+        // GET: api/Sessions
         [HttpGet]
-        public async Task<ActionResult<List<SessionResponse>>> Get()
+        public async Task<ActionResult<List<SessionResponse>>> GetSessions()
         {
             var sessions = await _context.Sessions.AsNoTracking()
-                                             .Include(s => s.Track)
-                                             .Include(s => s.SessionSpeakers)
-                                                .ThenInclude(ss => ss.Speaker)
-                                             .Select(m => m.MapSessionResponse())
-                                             .ToListAsync();
+                                                  .Include(s => s.Track)
+                                                  .Include(s => s.SessionSpeakers)
+                                                      .ThenInclude(ss => ss.Speaker)
+                                                  .Select(m => m.MapSessionResponse())
+                                                  .ToListAsync();
             return sessions;
         }
 
+        // GET: api/Sessions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SessionResponse>> Get(int id)
         {
             var session = await _context.Sessions.AsNoTracking()
-                                            .Include(s => s.Track)
-                                            .Include(s => s.SessionSpeakers)
-                                                .ThenInclude(ss => ss.Speaker)
-                                            .SingleOrDefaultAsync(s => s.Id == id);
+                                                 .Include(s => s.Track)
+                                                 .Include(s => s.SessionSpeakers)
+                                                     .ThenInclude(ss => ss.Speaker)
+                                                 .SingleOrDefaultAsync(s => s.Id == id);
 
             if (session == null)
             {
@@ -50,28 +52,11 @@ namespace BackEnd.Controllers
             return session.MapSessionResponse();
         }
 
-        [HttpPost]
-        public async Task<ActionResult<SessionResponse>> Post(ConferenceDTO.Session input)
-        {
-            var session = new Data.Session
-            {
-                Title = input.Title,
-                StartTime = input.StartTime,
-                EndTime = input.EndTime,
-                Abstract = input.Abstract,
-                TrackId = input.TrackId
-            };
-
-            _context.Sessions.Add(session);
-            await _context.SaveChangesAsync();
-
-            var result = session.MapSessionResponse();
-
-            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
-        }
-
+        // PUT: api/Sessions/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, ConferenceDTO.Session input)
+        public async Task<IActionResult> PutSession(int id, ConferenceDTO.Session input)
         {
             var session = await _context.Sessions.FindAsync(id);
 
@@ -92,8 +77,32 @@ namespace BackEnd.Controllers
             return NoContent();
         }
 
+        // POST: api/Sessions
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<SessionResponse>> PostSession(ConferenceDTO.Session input)
+        {
+            var session = new Data.Session
+            {
+                Title = input.Title,
+                StartTime = input.StartTime,
+                EndTime = input.EndTime,
+                Abstract = input.Abstract,
+                TrackId = input.TrackId
+            };
+
+            _context.Sessions.Add(session);
+            await _context.SaveChangesAsync();
+
+            var result = session.MapSessionResponse();
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+        }
+
+        // DELETE: api/Sessions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<SessionResponse>> Delete(int id)
+        public async Task<ActionResult<SessionResponse>> DeleteSession(int id)
         {
             var session = await _context.Sessions.FindAsync(id);
 
@@ -108,13 +117,11 @@ namespace BackEnd.Controllers
             return session.MapSessionResponse();
         }
 
-
         [HttpPost("upload")]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Upload([FromForm]ConferenceFormat format, IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile file)
         {
-            var loader = GetLoader(format);
-
+            var loader = new SessionizeLoader();
             using (var stream = file.OpenReadStream())
             {
                 await loader.LoadDataAsync(stream, _context);
@@ -123,21 +130,6 @@ namespace BackEnd.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
-        }
-
-        private static DataLoader GetLoader(ConferenceFormat format)
-        {
-            if (format == ConferenceFormat.Sessionize)
-            {
-                return new SessionizeLoader();
-            }
-            return new DevIntersectionLoader();
-        }
-
-        public enum ConferenceFormat
-        {
-            Sessionize,
-            DevIntersections
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ConferenceDTO;
 
@@ -16,6 +14,6 @@ namespace FrontEnd.Services
         Task<bool> AddAttendeeAsync(Attendee attendee);
         Task<AttendeeResponse> GetAttendeeAsync(string name);
         Task DeleteSessionAsync(int id);
-        Task<List<SearchResult>> SearchAsync(string query);
+	Task<List<SearchResult>> SearchAsync(string query);
     }
 }

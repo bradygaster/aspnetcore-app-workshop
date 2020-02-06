@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using BackEnd.Data;
 using ConferenceDTO;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Controllers
@@ -21,26 +22,26 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<SearchResult>>> Search(SearchTerm term)
+        public async Task<ActionResult<List<SearchResult>>> SearchAsync(SearchTerm term)
         {
             var query = term.Query;
             var sessionResults = await _context.Sessions.Include(s => s.Track)
-                                                .Include(s => s.SessionSpeakers)
-                                                    .ThenInclude(ss => ss.Speaker)
-                                                .Where(s =>
-                                                    s.Title.Contains(query) ||
-                                                    s.Track.Name.Contains(query)
-                                                )
-                                                .ToListAsync();
+                                                        .Include(s => s.SessionSpeakers)
+                                                        .ThenInclude(ss => ss.Speaker)
+                                                        .Where(s =>
+                                                            s.Title.Contains(query) ||
+                                                           s.Track.Name.Contains(query)
+                                                        )
+                                                       .ToListAsync();
 
             var speakerResults = await _context.Speakers.Include(s => s.SessionSpeakers)
-                                                    .ThenInclude(ss => ss.Session)
-                                                .Where(s =>
-                                                    s.Name.Contains(query) ||
-                                                    s.Bio.Contains(query) ||
-                                                    s.WebSite.Contains(query)
-                                                )
-                                                .ToListAsync();
+                                                        .ThenInclude(ss => ss.Session)
+                                                        .Where(s =>
+                                                            s.Name.Contains(query) ||
+                                                            s.Bio.Contains(query) ||
+                                                            s.WebSite.Contains(query)
+                                                        )
+                                                       .ToListAsync();
 
             var results = sessionResults.Select(s => new SearchResult
             {
