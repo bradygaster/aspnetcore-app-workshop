@@ -12,11 +12,17 @@ git clone https://github.com/dotnet-presentations/aspnetcore-app-workshop
 
 > **Note:** You must have previously installed the [Git tools](https://git-scm.com/downloads)
 
-You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line.
+You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line. If you are using the .NET Core CLI, run the following command to install the HTTPS certificate for the development web server:
+
+```console
+dotnet dev-certs https --trust
+```
 
 > **Note:** If you're installing Visual Studio, you only need to select the **ASP.NET and web development** workload.
 
 If you have issues downloading the installers, we may have USB sticks with offline installers for you to use.
+
+In the exercises, you have a choice between using a local SQL Server instance or a SQLite database. If you are running on a non-Windows computer, you should probably use SQLite as SQL Server might not be available. If you are running on Windows, you can use SQL Server or SQLite.
 
 ## What you'll build
 
