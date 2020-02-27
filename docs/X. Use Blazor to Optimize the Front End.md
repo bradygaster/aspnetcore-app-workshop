@@ -16,27 +16,71 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
     git clone https://github.com/dotnet-presentations/aspnetcore-app-workshop
     ```
 
-2. Add the **SessionsListComponent** to the starter solution for this exercise:
+2. Import the namespaces required by Blazor:
 
     - **If you're using Visual Studio 2019:**
 
         1. Open the **ConferencePlanner** solution in the **save-points/Blazor/Starter/ConferencePlanner** folder in your local clone of the Git repository.
 
-        2. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Folder**.
+        2. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Item**.
+
+            ![The **Solution Explorer** window. The user is adding a new tem to the **FrontEnd** project](images/x-new-item.png)
+
+        
+        3. In the **Add New Item - FrontEnd** dialog box, click **Text File**. Name the file **_Imports.razor**, and then click **Add**
+
+            ![The **Add New Item - FrontEnd** dialog box. The user is creating a new text file named **_Imports_.razor**](images/x-new-text.png)
+
+        
+        4. Add the following directives to the file:
+
+            ```razor
+            @using System.Net.Http
+            @using Microsoft.AspNetCore.Authorization
+            @using Microsoft.AspNetCore.Components.Authorization
+            @using Microsoft.AspNetCore.Components.Forms
+            @using Microsoft.AspNetCore.Components.Routing
+            @using Microsoft.AspNetCore.Components.Web
+            @using Microsoft.JSInterop
+            @using FrontEnd
+            ```
+
+    - **If you're using the .NET Core CLI:**
+
+        1. Move to the **save-points/Blazor/Starter/ConferencePlanner/FrontEnd** folder in your local clone of the Git repository. 
+
+        2. Create a new file named **_Imports.razor** using an editor of your choice.
+
+        3. Add the following directives to the file:
+
+            ```razor
+            @using System.Net.Http
+            @using Microsoft.AspNetCore.Authorization
+            @using Microsoft.AspNetCore.Components.Authorization
+            @using Microsoft.AspNetCore.Components.Forms
+            @using Microsoft.AspNetCore.Components.Routing
+            @using Microsoft.AspNetCore.Components.Web
+            @using Microsoft.JSInterop
+            @using FrontEnd
+            ```
+
+3. Add the **SessionsListComponent** to the starter solution for this exercise:
+
+    - **If you're using Visual Studio 2019:**
+
+        1. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Folder**.
 
             ![The **Solution Explorer** window. The user is adding a new folder to the **FrontEnd** project](images/x-new-folder.png)
 
-        3. Name the new folder **Components**.
+        2. Name the new folder **Components**.
 
-        4. In the **Solution Explorer** window, right-click the new **Components** folder, click **Add**, and then click **New Item**.
+        3. In the **Solution Explorer** window, right-click the new **Components** folder, click **Add**, and then click **New Item**.
 
-            ![The **Solution Explorer** window. The user is adding a new tem to the **Components** folder](images/x-new-item.png)
-
-        5. In the **Add New Item - FrontEnd** dialog box, click **Razor component**. Name the component **SessionsListComponent.razor**, and then click **Add**
+        4. In the **Add New Item - FrontEnd** dialog box, click **Razor component**. Name the component **SessionsListComponent.razor**, and then click **Add**
 
             ![The **Add New Item - FrontEnd** dialog box. The user is creating a new Razor component named **SessionsListComponent.razor**](images/x-new-razor.png)
 
-        6. Open the **SessionsListComponent.razor** file, and delete the current contents.
+        5. Open the **SessionsListComponent.razor** file, and delete the current contents.
 
     - **If you're using the .NET Core CLI:**
 
@@ -44,9 +88,9 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
         2. Create a new folder named **Components**.
 
-        3. Move to the **Components** folder, and create a new file named **SessionsListComponent.razor** using an editor of your choice.
+        3. Move to the **Components** folder, and create a new file named **SessionsListComponent.razor**.
 
-3. Add the following directives to the start of the **SessionsListComponent.razor** file:
+4. Add the following directives to the start of the **SessionsListComponent.razor** file:
 
     ```razor
     @using FrontEnd.Services
@@ -59,7 +103,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
     The component will use types in the **FrontEnd.Services** and **ConferenceDTO** namespaces. It will also use an **IApiClient** object to connect to the **BackEnd** web API service. You'll inject the **IApiClient** oject into the component when the application starts running.
 
-4. Add the following **@code** block to the end of the razor component:
+5. Add the following **@code** block to the end of the razor component:
 
     ```csharp
     @code {
@@ -116,7 +160,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
     The **SetDay** method takes a day number as a parameter (day 0 is the first day of the conference), and updates the **Sessions** property with the session details that day.
 
-5. Add the following `<style>` block to the component, between the **@namespace** directive and the `@code` block.
+6. Add the following `<style>` block to the component, between the **@namespace** directive and the `@code` block.
 
     ```html
     ...
@@ -156,7 +200,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
     The **Index** page currently displays the days of the conference as HTML links. The component will use buttons instead. You'll use these styles to change the appearance of the buttons.
 
-6. Between the `<styles>` block and the `@code` block , add the following markup
+7. Between the `<styles>` block and the `@code` block , add the following markup
 
     ```html
         ...
@@ -178,4 +222,182 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
         ...
     ```
 
-    This markup iterates through the **DayOffsets** collection created in the `@Code` block. This collection is populated by the **OnInitializedAsync** method, and contains the list of days that the conference spans. The markup displays each day as a button, and sets the `onclick` event handler to call the **SetDay** method in the `@Code` block to update the display.
+    This markup is similar to that in the **Index.cshtml** file. It iterates through the **DayOffsets** collection created in the `@Code` block. This collection is populated by the **OnInitializedAsync** method, and contains the list of days that the conference spans. The markup displays each day as a button, and sets the `onclick` event handler to call the **SetDay** method in the `@Code` block to update the display.
+
+8. After the code you just added, and before the `@code` block, add the markup shown below:
+
+    ```html
+    ...
+    <div class="agenda">
+        @if (Sessions != null)
+        {
+            @foreach (var timeSlot in Sessions)
+            {
+                <h4>@timeSlot.Key?.ToString("HH:mm")</h4>
+                <div class="row">
+                    @foreach (var session in timeSlot)
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card shadow session h-100">
+                                <div class="card-header">@session.Track?.Name</div>
+                                <div class="card-body">
+                                    @{var sessionRef = $"/Session/{session.Id}";}
+                                    <h5 class="card-title"><NavLink href=@sessionRef>@session.Title</NavLink></h5>
+                                </div>
+                                <div class="card-footer">
+                                    <ul class="list-inline mb-0">
+                                        @foreach (var speaker in session.Speakers)
+                                        {
+                                            <li class="list-inline-item">
+                                                @{var speakerRef = $"/Speaker/{speaker.Id}"; }
+                                                <NavLink href=@speakerRef>@speaker.Name</NavLink>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+
+    @code {
+        ...
+    ```
+
+    This code is also similar to that found in the **Index.cshtml** file. It displays the sessions in each timeslot for the currently selected day. The markup uses `<NavLink>` tags rather than `<a>` tags to link to the session and speaker pages. The original `<a>` tags in the **Index.cshtml** file use ASP.NET routing helpers that aren't available in Blazor components.
+
+## Update the Index page
+
+1. In the **Pages** folder of the **FrontEnd** project, open the **Index.cshtml** file. Much of the functionality in this file is now implemented in the **SessionsListComponent** component.
+
+2. Replace the contents of the **Index.cshtml** file with the code shown below:
+
+    ```razor
+    @page
+    @using FrontEnd.Components
+
+    @{
+        ViewData["Title"] = "Home page";
+    }
+
+    <h1 class="mb-4">My Conference @System.DateTime.Now.Year</h1>
+
+    <component type="typeof(SessionsListComponent)" render-mode="ServerPrerendered" />
+    ```
+
+    Note that the page no longer uses the **IndexModel** model. The code is contained in the **SessionsListComponent** instead, as is the markup used to display the session information.
+
+## Configure the **FrontEnd** to support Blazor at runtime
+
+Blazor components require additional runtime support in the form of scripts and other services that you must add to the web application.
+
+1. In the **Shared** folder under the **Pages** folder in the **FrontEnd** project, open the **_Layout.cshtml** file.
+
+2. Add the following `<base>` tag to the end of the `<head>` element, after the existing stylesheet links, as shown below:
+
+    ```html
+    ...
+    <head>
+        ...
+        <link rel="stylesheet" ... />
+        <base href="~/" />
+    </head>
+    ...
+    ```
+
+3. Near the end of the file, add the following `<script>` link, just before the closing `</body>` tag:
+
+    ```html
+        ...
+        <script src="_framework/blazor.server.js"></script>
+    </body>
+    </html>
+    ```
+
+4. Open the **Startup.cs** file in the root folder of the **FrontEnd** project.
+
+5. Add the statement shown below to the end of the **ConfigureService** method in the **Startup** class:
+
+    ```csharp
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddServerSideBlazor();
+    }
+    ```
+
+6. Find the `app.UseEndpoints` statement at the end of the **Configure** method. Modify this statement and add the Blazor hub endpoints, as shown in the code below:
+
+    ```csharp
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        ...
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages();
+            
+            // New statement below
+            endpoints.MapBlazorHub();
+        });
+    }
+    ```
+
+## Test the solution
+
+### If you're using Visual Studio
+
+1. On the **Debug** menu, click **Start Debugging** to build and run the solution.
+
+    Two web-browser windows will appear; one for the **BackEnd** web API service displaying the list of speakers in JSON format, and another for the **FrontEnd** project. The index page for the **FrontEnd** project should look similar to the image below:
+
+    ![The **FrontEnd** web application](images/x-front-end.png)
+
+2. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before. The main difference for the user is that the application should be more responsive. You can verify this with the following procedure:
+
+    1. When you click the button for any day, the icon on the *progress/refresh* button in the browser toolbar remains as a circular arrow:
+
+        ![The *progress/refresh* button in the browser toolbar. It is a circular arrow](images/x-progess-icon.png)
+
+    2. Click the title of any session or speaker. This action results in a regular HTTP request rather than a Blazor SignalR exchange. You will momentarily see the icon on the *progress/refresh* change to an *X* symbol to indicate that an HTTP request has been issues, and the browser is waiting for the response.
+
+        ![The *progress/refresh* button in the browser toolbar. It is a circular arrow](images/x-progress-wait.png)
+
+### If you're using the .NET Core CLI
+
+
+1. Open the **launchSettings.json** file in the **Properties** folder of the **FrontEnd** project.
+
+2. Make a note of the HTTPS URL in the **applicationUrl** property in the **FrontEnd** profile, and then close the **launchSettings.json** file.
+
+3. Move to the **ConferencePlanner** solution folder.
+
+4. Run the following command to run the **BackEnd** project in a new console window:
+
+    ```console
+    start dotnet run --project BackEnd
+    ```
+
+5. When the **BackEnd** project has started, return to the original console window and run the following command to start the **FrontEnd** project:
+
+    ```console
+    dotnet run --project FrontEnd
+    ```
+
+6. Open a web browser, and go to the HTTPS URL of the **FrontEnd** web application that you noted earlier.
+
+7. Open another web browser window, and go to the HTTPS URL of the **BackEnd** web API service.
+
+8. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before.
+
+9. Display the console window running the **FrontEnd** web application. In the web browser, click a link for any session. In the console window, you'll see the HTTP requests and corresponding response messages that occur as a result of retrieving the session details. It should look similar to those in the image below:
+
+    ![The console window for the **FrontEnd** web application. The window shows the HTTP request and response messages being sent by the web application](images/x-console.png)
+
+10. In the web browser, return to the Home page for the **FrontEnd** web application.
+
+11. With the console window for the **FrontEnd** application visible, click the buttons on the Home page to display the sessions for each day. In the console window, you shouldn't see any HTTP activity. This is because the web application and the **BackEnd** web API service are communicating over a SignalR channel.
+
+> **Note:** You'll find the completed code for the exercises in this session in the [Blazor Session save point folder](../save-points/Blazor/Complete).
