@@ -33,9 +33,6 @@ namespace BackEnd
             {
                 // For SQL Server
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                
-                // For SQLite
-                //options.UseSqlite("Data Source=conferences.db");
             });
             services.AddControllers();
 

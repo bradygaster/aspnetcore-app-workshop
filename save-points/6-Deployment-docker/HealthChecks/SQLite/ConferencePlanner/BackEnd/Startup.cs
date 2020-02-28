@@ -31,8 +31,6 @@ namespace BackEnd
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                // SQL Server
-                //  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 // SQLite
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
