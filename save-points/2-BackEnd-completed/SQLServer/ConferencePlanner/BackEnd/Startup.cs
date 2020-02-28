@@ -33,9 +33,6 @@ namespace BackEnd
             {
                 // SQL Server
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                
-                // SQLite
-                // options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
 
