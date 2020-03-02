@@ -2,11 +2,11 @@
 
 In this session, you'll rework part of the **FrontEnd** web application to use a Blazor component to fetch and display conference session information.
 
-The **Agenda** page for the web application enables the user to switch between the different days of the conference, and display the sessions for that day. When the user clicks a link for the specified day, the web application sends an HTTP GET request to the **BackEnd** web API service to fetch the data. The data is passed back in JSON format. The size of the payload can be significant, and can take a noticeable time.
+The **Agenda** page for the web application enables the user to switch between the different days of the conference, and display the sessions for that day. When the user clicks a link for the specified day, the web application sends an HTTP GET request to the **BackEnd** web API service to fetch the data. The data is passed back in JSON format. The size of the payload might be significant, and can take a noticeable time.
 
-Blazor uses SignalR for transmitting data between the web server and the client. SignalR can be far more efficient for many types of application, especially those that require real-time or near real-time responses. SignalR uses a more compact payload format, and can push data directly to a client rather than waiting for a client to send a request.
+Blazor uses SignalR for transmitting data between the web server and the client. SignalR can be far more efficient for many types of application, especially those that require real-time, or near real-time responses. SignalR uses a more compact payload format, and can push data directly to a client rather than waiting for a request.
 
-To enable you to focus on Blazor functionality, this exercise uses a simplied version of the **ConferencePlanner** application. This version doesn't include user authentication or support administrative tasks.
+So you can focus on Blazor functionality, this exercise uses a simplified version of the **ConferencePlanner** application. This version doesn't include user authentication or support administrative tasks.
 
 ## Create the **SessionsListComponent** Blazor component
 
@@ -24,10 +24,10 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
         2. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Item**.
 
-            ![The **Solution Explorer** window. The user is adding a new tem to the **FrontEnd** project](images/x-new-item.png)
+            ![The **Solution Explorer** window. The user is adding a new item to the **FrontEnd** project](images/x-new-item.png)
 
         
-        3. In the **Add New Item - FrontEnd** dialog box, click **Text File**. Name the file **_Imports.razor**, and then click **Add**
+        3. In the **Add New Item - FrontEnd** dialog box, click **Text File**. Name the file **_Imports.razor**, and then click **Add**.
 
             ![The **Add New Item - FrontEnd** dialog box. The user is creating a new text file named **_Imports_.razor**](images/x-new-text.png)
 
@@ -76,7 +76,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
         3. In the **Solution Explorer** window, right-click the new **Components** folder, click **Add**, and then click **New Item**.
 
-        4. In the **Add New Item - FrontEnd** dialog box, click **Razor component**. Name the component **SessionsListComponent.razor**, and then click **Add**
+        4. In the **Add New Item - FrontEnd** dialog box, click **Razor component**. Name the component **SessionsListComponent.razor**, and then click **Add**.
 
             ![The **Add New Item - FrontEnd** dialog box. The user is creating a new Razor component named **SessionsListComponent.razor**](images/x-new-razor.png)
 
@@ -101,7 +101,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
     @namespace FrontEnd.Components
     ```
 
-    The component will use types in the **FrontEnd.Services** and **ConferenceDTO** namespaces. It will also use an **IApiClient** object to connect to the **BackEnd** web API service. You'll inject the **IApiClient** oject into the component when the application starts running.
+    The component will use types in the **FrontEnd.Services** and **ConferenceDTO** namespaces. It will also use an **IApiClient** object to connect to the **BackEnd** web API service. You'll inject the **IApiClient** object into the component when the application starts running.
 
 5. Add the following **@code** block to the end of the razor component:
 
@@ -158,9 +158,9 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
     The **OnInitializedAsync** method runs when the component is first created. The component uses the **IApiClient** object to retrieve the details of the sessions for the conference, and caches them in the **sessions** collection. The **Sessions** property is populated with the sessions for the first day of the conference from this collection.
 
-    The **SetDay** method takes a day number as a parameter (day 0 is the first day of the conference), and updates the **Sessions** property with the session details that day.
+    The **SetDay** method takes a day number as a parameter (day 0 is the first day of the conference), and updates the **Sessions** property with the session details for that day.
 
-6. Add the following `<style>` block to the component, between the **@namespace** directive and the `@code` block.
+6. Add the following `<style>` block to the component, between the **@namespace** directive and the `@code` block:
 
     ```html
     ...
@@ -200,7 +200,7 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
 
     The **Index** page currently displays the days of the conference as HTML links. The component will use buttons instead. You'll use these styles to change the appearance of the buttons.
 
-7. Between the `<styles>` block and the `@code` block , add the following markup
+7. Between the `<styles>` block and the `@code` block, add the following markup:
 
     ```html
         ...
@@ -288,13 +288,13 @@ To enable you to focus on Blazor functionality, this exercise uses a simplied ve
     <component type="typeof(SessionsListComponent)" render-mode="ServerPrerendered" />
     ```
 
-    Note that the page no longer uses the **IndexModel** model. The code is contained in the **SessionsListComponent** instead, as is the markup used to display the session information.
+    Note the page no longer uses the **IndexModel** model. The code is contained in the **SessionsListComponent** instead, as is the markup used to display the session information.
 
 ## Configure the **FrontEnd** to support Blazor at runtime
 
 Blazor components require additional runtime support in the form of scripts and other services that you must add to the web application.
 
-1. In the **Shared** folder under the **Pages** folder in the **FrontEnd** project, open the **_Layout.cshtml** file.
+1. In the **Shared** folder, under the **Pages** folder in the **FrontEnd** project, open the **_Layout.cshtml** file.
 
 2. Add the following `<base>` tag to the end of the `<head>` element, after the existing stylesheet links, as shown below:
 
@@ -347,25 +347,25 @@ Blazor components require additional runtime support in the form of scripts and 
 
 ## Test the solution
 
-### If you're using Visual Studio
+### If you're using Visual Studio:
 
 1. On the **Debug** menu, click **Start Debugging** to build and run the solution.
 
-    Two web-browser windows will appear; one for the **BackEnd** web API service displaying the list of speakers in JSON format, and another for the **FrontEnd** project. The index page for the **FrontEnd** project should look similar to the image below:
+    Two web browser windows will appear; one for the **BackEnd** web API service displaying the list of speakers in JSON format, and another for the **FrontEnd** project. The index page for the **FrontEnd** project should look similar to the image below:
 
     ![The **FrontEnd** web application](images/x-front-end.png)
 
-2. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before. The main difference for the user is that the application should be more responsive. You can verify this with the following procedure:
+2. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before. The main difference for the user is that the application should be more responsive. Verify this situation with the following procedure:
 
     1. When you click the button for any day, the icon on the *progress/refresh* button in the browser toolbar remains as a circular arrow:
 
-        ![The *progress/refresh* button in the browser toolbar. It is a circular arrow](images/x-progess-icon.png)
+        ![The *progress/refresh* button in the browser toolbar. It's a circular arrow](images/x-progess-icon.png)
 
-    2. Click the title of any session or speaker. This action results in a regular HTTP request rather than a Blazor SignalR exchange. You will momentarily see the icon on the *progress/refresh* change to an *X* symbol to indicate that an HTTP request has been issues, and the browser is waiting for the response.
+    2. Click the title of any session or speaker. This action results in a regular HTTP request rather than a Blazor SignalR exchange. You'll momentarily see the icon on the *progress/refresh* change to an *X* symbol to indicate that an HTTP request has been issued. The browser is waiting for the response.
 
-        ![The *progress/refresh* button in the browser toolbar. It is a circular arrow](images/x-progress-wait.png)
+        ![The *progress/refresh* button in the browser toolbar. It's a circular arrow](images/x-progress-wait.png)
 
-### If you're using the .NET Core CLI
+### If you're using the .NET Core CLI:
 
 
 1. Open the **launchSettings.json** file in the **Properties** folder of the **FrontEnd** project.
@@ -380,7 +380,7 @@ Blazor components require additional runtime support in the form of scripts and 
     start dotnet run --project BackEnd
     ```
 
-5. When the **BackEnd** project has started, return to the original console window and run the following command to start the **FrontEnd** project:
+5. When the **BackEnd** project has started, return to the original console window, and run the following command to start the **FrontEnd** project:
 
     ```console
     dotnet run --project FrontEnd
@@ -392,7 +392,7 @@ Blazor components require additional runtime support in the form of scripts and 
 
 8. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before.
 
-9. Display the console window running the **FrontEnd** web application. In the web browser, click a link for any session. In the console window, you'll see the HTTP requests and corresponding response messages that occur as a result of retrieving the session details. It should look similar to those in the image below:
+9. Display the console window running the **FrontEnd** web application. In the web browser, click a link for any session. In the console window, you'll see the HTTP requests and corresponding response messages that occur after you retrieve the session details. It should look similar to those in the image below:
 
     ![The console window for the **FrontEnd** web application. The window shows the HTTP request and response messages being sent by the web application](images/x-console.png)
 
