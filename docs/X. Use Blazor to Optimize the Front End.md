@@ -22,7 +22,7 @@ So you can focus on Blazor functionality, this exercise uses a simplified versio
 
         1. Open the **ConferencePlanner** solution in the **save-points/Blazor/Starter/ConferencePlanner** folder in your local clone of the Git repository.
 
-        2. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Item**.
+        2. In Solution Explorer, right-click the **FrontEnd** project, point to **Add**, and then click **New Item**.
 
             ![The **Solution Explorer** window. The user is adding a new item to the **FrontEnd** project](images/x-new-item.png)
 
@@ -68,19 +68,19 @@ So you can focus on Blazor functionality, this exercise uses a simplified versio
 
     - **If you're using Visual Studio 2019:**
 
-        1. In the **Solution Explorer** window, right-click the **FrontEnd** project, click **Add**, and then click **New Folder**.
+        1. In Solution Explorer, right-click the **FrontEnd** project, point to **Add**, and then click **New Folder**.
 
             ![The **Solution Explorer** window. The user is adding a new folder to the **FrontEnd** project](images/x-new-folder.png)
 
         2. Name the new folder **Components**.
 
-        3. In the **Solution Explorer** window, right-click the new **Components** folder, click **Add**, and then click **New Item**.
+        3. In Solution Explorer, right-click the new **Components** folder, point to **Add**, and then click **New Item**.
 
-        4. In the **Add New Item - FrontEnd** dialog box, click **Razor component**. Name the component **SessionsListComponent.razor**, and then click **Add**.
+        4. In the **Add New Item - FrontEnd** dialog box, click **Razor Component**. Name the component **SessionsListComponent.razor**, and then click **Add**.
 
             ![The **Add New Item - FrontEnd** dialog box. The user is creating a new Razor component named **SessionsListComponent.razor**](images/x-new-razor.png)
 
-        5. Open the **SessionsListComponent.razor** file, and delete the current contents.
+        5. In the **SessionsListComponent.razor** file, delete the current contents.
 
     - **If you're using the .NET Core CLI:**
 
@@ -319,7 +319,7 @@ Blazor components require additional runtime support in the form of scripts and 
 
 4. Open the **Startup.cs** file in the root folder of the **FrontEnd** project.
 
-5. Add the statement shown below to the end of the **ConfigureService** method in the **Startup** class:
+5. Add the statement shown below to the end of the **ConfigureServices** method in the **Startup** class:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -368,36 +368,42 @@ Blazor components require additional runtime support in the form of scripts and 
 ### If you're using the .NET Core CLI:
 
 
-1. Open the **launchSettings.json** file in the **Properties** folder of the **FrontEnd** project.
+1. Open the **launchSettings.json** file in the **Properties** folder of the **BackEnd** project.
 
-2. Make a note of the HTTPS URL in the **applicationUrl** property in the **FrontEnd** profile, and then close the **launchSettings.json** file.
+2. Make a note of the HTTPS URL in the **applicationUrl** property in the **BackEnd** profile, and then close the **launchSettings.json** file.
 
-3. Move to the **ConferencePlanner** solution folder.
+3. Open the **appsettings.json** file in the root folder of the **FrontEnd** project.
 
-4. Run the following command to run the **BackEnd** project in a new console window:
+4. Change the **ServiceUrl** property to the HTTPS URL you noted in step 2.
+
+5. Open the **launchSettings.json** file in the **Properties** folder of the **FrontEnd** project.
+
+6. Make a note of the HTTPS URL in the **applicationUrl** property in the **FrontEnd** profile, and then close the **launchSettings.json** file.
+
+7. Move to the **ConferencePlanner** solution folder.
+
+8. Run the following command to run the **BackEnd** project in a new console window:
 
     ```console
     start dotnet run --project BackEnd
     ```
 
-5. When the **BackEnd** project has started, return to the original console window, and run the following command to start the **FrontEnd** project:
+9. When the **BackEnd** project has started, return to the original console window, and run the following command to start the **FrontEnd** project:
 
     ```console
     dotnet run --project FrontEnd
     ```
 
-6. Open a web browser, and go to the HTTPS URL of the **FrontEnd** web application that you noted earlier.
+10. Open a web browser, and go to the HTTPS URL of the **FrontEnd** web application that you noted earlier.
 
-7. Open another web browser window, and go to the HTTPS URL of the **BackEnd** web API service.
+11. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before.
 
-8. Click one of the day buttons. The display should change to show the sessions for that day, and the application should function much as it did before.
-
-9. Display the console window running the **FrontEnd** web application. In the web browser, click a link for any session. In the console window, you'll see the HTTP requests and corresponding response messages that occur after you retrieve the session details. It should look similar to those in the image below:
+12. Display the console window running the **FrontEnd** web application. In the web browser, click a link for any session. In the console window, you'll see the HTTP requests and corresponding response messages that occur after you retrieve the session details. It should look similar to those in the image below:
 
     ![The console window for the **FrontEnd** web application. The window shows the HTTP request and response messages being sent by the web application](images/x-console.png)
 
-10. In the web browser, return to the Home page for the **FrontEnd** web application.
+13. In the web browser, return to the Home page for the **FrontEnd** web application.
 
-11. With the console window for the **FrontEnd** application visible, click the buttons on the Home page to display the sessions for each day. In the console window, you shouldn't see any HTTP activity. This is because the web application and the **BackEnd** web API service are communicating over a SignalR channel.
+14. With the console window for the **FrontEnd** application visible, click the buttons on the Home page to display the sessions for each day. In the console window, you shouldn't see any HTTP activity. This is because the web application and the **BackEnd** web API service are communicating over a SignalR channel.
 
 > **Note:** You'll find the completed code for the exercises in this session in the [Blazor Session save point folder](../save-points/Blazor/Complete).
