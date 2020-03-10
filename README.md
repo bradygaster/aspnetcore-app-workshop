@@ -12,13 +12,19 @@ git clone https://github.com/dotnet-presentations/aspnetcore-app-workshop
 
 > **Note:** You must have previously installed the [Git tools](https://git-scm.com/downloads)
 
-You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line. If you are using the .NET Core CLI, run the following command to install the HTTPS certificate for the development web server:
+You can perform the exercises using [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/), or the [.NET Core CLI and SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) from the command line.
+
+If you're installing Visual Studio, you only need to select the **ASP.NET and web development** workload.
+
+If you're using the .NET Core CLI, run the following command to install the HTTPS certificate for the development web server:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-> **Note:** If you're installing Visual Studio, you only need to select the **ASP.NET and web development** workload.
+If you are using the .NET Core CLI, you'all also need the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) installed on your computer.
+
+
 
 If you have issues downloading the installers, we may have USB sticks with offline installers for you to use.
 
@@ -40,9 +46,11 @@ In Session 5, you'll enable logged-in users to select sessions and create their 
 
 In Session 6, you'll also learn how to deploy the back-end and front-end applications to a production environment. This session presents several different deployment scenarios, including deployment to Azure, and deployment as Docker containers.
 
-Session 7 presents additional challenges you can tackle if you have time.
+In Session 7, you'll optimize the fromt-end web application to use Blazor to communicate with the back-end. Blazor uses SignalR to pass data between a web server and a client application, and can be more efficient for updating a web page than requesting a new version of the entire page over HTTP.
 
-Session 8 shows how to create a Single Page Application (SPA) that acts as an alternative front end.
+Session 8 presents additional challenges you can tackle if you have time.
+
+Session 9 shows how to create a Single Page Application (SPA) that acts as an alternative front end.
 
 ### Application architecture
 
@@ -68,5 +76,6 @@ The table below provides links to the exercises for each session.
 | [Session #4](docs/4.%20Add%20auth%20features.md) | Add authentication to the front-end web application. Implement an administrator policy that enables specific users to edit sessions information. Define and use a custom auth tag helper. |
 | [Session #5](docs/5.%20Add%20personal%20agenda.md) | Enable users to register for a conference and create their own personal agenda. |
 | [Session #6](docs/6.%20Production%20Readiness%20and%20Deployment.md) | Configure health diagnostics for the back-end web API and the front-end web application. Deploy the back-end and front-end components to a production environment. |
-| [Session #7](docs/7.%20Challenges.md) | Add support for external authentication (Google or Twitter). Add a third-party logger to the front-end web application. Provide support for image uploading, editing, and display. Implement caching in the front-end web application. Modify the back end to store data in MySQL or PostgreSQL. Write unit and functional tests. Add further features to the front-end and back-end applications.
-| [Session #8](docs/8.%20SPA%20FrontEnd.md) | Create a SPA front-end web application. |
+| [Session #7](docs/7.%20Use%20Blazor%20to%20Optimize%20the%20Front%20End.md) | Modify the front-end web application to use Blazor to communicate with the back-end over a SignalR channel. |
+| [Session #8](docs/8.%20Challenges.md) | Add support for external authentication (Google or Twitter). Add a third-party logger to the front-end web application. Provide support for image uploading, editing, and display. Implement caching in the front-end web application. Modify the back end to store data in MySQL or PostgreSQL. Write unit and functional tests. Add further features to the front-end and back-end applications.
+| [Session #9](docs/9.%20SPA%20FrontEnd.md) | Create a SPA front-end web application. |
